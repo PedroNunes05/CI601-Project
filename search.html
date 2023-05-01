@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width= device-width, initial-scale=1" />
+
+	<title> Quiz website </title>
+
+	<script src="https://kit.fontawesome.com/8a181a8ab1.js" crossorigin="anonymous"></script>
+
+	<link href="styles.css" rel="stylesheet" >
+	<link href="normalize.css" rel="stylesheet">
+	<script defer src="nav.js"></script>
+	<script defer src="search.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+	<header>
+
+		<div class="nav">
+
+			<div class="logo">
+				<a href="index.html"> Home </a>
+			</div>
+
+			<div class="cate">
+				<a href="category.html">Category</a>
+			</div>
+			<div class="menu">
+				<button id="signIn">Sign in</button>
+				<ul>
+					<li id="accountMenu" class="profile" style="display:none;">
+						<img src="image/profile.png" />
+						<div class="account-menu">
+							<a href="account.html">Account </a>
+							<a href="history.html">History</a>
+							<a href="yourQuiz.html">Your Quiz</a>
+							<a onclick="logOut()"> Log out </a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+			<div class="create">
+				<a href="createQuiz.html">Create a Quiz</a>
+			</div>
+
+			<div class="clear1"> </div>
+
+			<div class="search">
+
+				<input type="text" class="search-input" placeholder="search an item" id="look">
+				<button type="submit" class="search-button" id="searchbutton">Search</button>
+
+			</div>
+
+			<div class="clear2"> </div>
+
+
+		</div>
+
+	</header>
+
+
+<main>
+	<div class="top">
+        <h2>Results</h2>
+		<div class="sortList">
+		<h3 class="sortBy">Sort by 
+		<select class="quizSort" id="sort" name="sortQuiz" onchange="radChange(value)">
+				<option value="quizReview" selected>By quiz rating</option>
+				<option value="attempts">Number of attemps</option>
+				<option value="avgScore">Average score</option>
+				<option value="dateCreated">Date created (new to old)</option>
+		</select>
+		</h3>
+		</div>
+    </div>
+	<br />
+	<div class="container" id="content">
+                <!-- this is where the results will apear -->
+    </div>
+</main>
+		
+
+</body>
+
+</html>

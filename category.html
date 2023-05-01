@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width= device-width, initial-scale=1" />
+
+	<title> Quiz website </title>
+
+	<script src="https://kit.fontawesome.com/8a181a8ab1.js" crossorigin="anonymous"></script>
+
+	<link href="styles.css" rel="stylesheet" >
+	<link href="normalize.css" rel="stylesheet">
+	<script defer src="nav.js"></script>
+	<script defer src="category.js"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+	<header>
+
+		<div class="nav">
+
+			<div class="logo">
+				<a href="index.html"> Home </a>
+			</div>
+
+			<div class="cate">
+				<a href="category.html">Category</a>
+			</div>
+			<div class="menu">
+				<button id="signIn">Sign in</button>
+				<ul>
+					<li id="accountMenu" class="profile" style="display:none;">
+						<img src="image/profile.png" />
+						<div class="account-menu">
+							<a href="account.html">Account </a>
+							<a href="history.html">History</a>
+							<a href="yourQuiz.html">Your Quiz</a>
+							<a onclick="logOut()"> Log out </a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+			<div class="create">
+				<a href="createQuiz.html">Create a Quiz</a>
+			</div>
+
+			<div class="clear1"> </div>
+
+			<div class="search">
+
+				<input type="text" class="search-input" placeholder="search an item" id="look">
+				<button type="submit" class="search-button" id="searchbutton">Search</button>
+
+			</div>
+
+			<div class="clear2"> </div>
+
+
+		</div>
+
+	</header>
+
+
+	<main>
+
+		<ul class="categories">
+
+			<li id="catmaths">  Maths  </li>
+
+			<li id="cathistory"> History </li>
+
+			<li id="catgeography"> Geography </li>
+
+			<li id="catentertainment"> Entertainment  </li>
+
+			<li id="catsports"> Sports </li>
+
+			<li id="catfun"> For Fun </li>
+
+		</ul>
+
+
+	</main>
+
+</body>
+
+</html>

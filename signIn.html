@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width= device-width, initial-scale=1" />
+
+	<title> Quiz website </title>
+
+	<script src="https://kit.fontawesome.com/8a181a8ab1.js" crossorigin="anonymous"></script>
+
+	<link href="styles.css" rel="stylesheet" >
+	<link href="normalize.css" rel="stylesheet" >
+	<script defer src="signIn.js"></script>
+	<script defer src="nav.js"></script>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+	<header>
+
+		<div class="nav">
+
+			<div class="logo">
+				<a href="index.html"> Home </a>
+			</div>
+
+			<div class="cate">
+				<a href="category.html">Category</a>
+			</div>
+			<div class="menu">
+				<button id="signIn">Sign in</button>
+				<ul>
+					<li id="accountMenu" class="profile" style="display:none;">
+						<img src="image/profile.png" />
+						<div class="account-menu">
+							<a href="account.html">Account </a>
+							<a href="history.html">History</a>
+							<a href="yourQuiz.html">Your Quiz</a>
+							<a onclick="logOut()"> Log out </a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+			<div class="create">
+				<a href="createQuiz.html">Create a Quiz</a>
+			</div>
+
+			<div class="clear1"> </div>
+
+			<div class="search">
+
+				<input type="text" class="search-input" placeholder="search an item" id="look">
+				<button type="submit" class="search-button" id="searchbutton">Search</button>
+
+			</div>
+
+			<div class="clear2"> </div>
+
+
+		</div>
+
+	</header>
+
+
+<main>
+	    <div class="top">
+		</div>
+	<div id="singIncont">
+				<h2 id="title">Sing In</h2>
+				<h4 id="response"></h4>
+                <form id="signINForm" onsubmit="event.preventDefault(); submitIt();">
+					<label class="signLabel" for="username" id="usernameLabel" style="display:none;">Username</label>
+					<input class="signInput" type="text" id="username" name="username" placeholder="Username" style="display:none;"><br />
+
+					<label class="signLabel" for="email">Email</label>
+                    <input class="signInput" type="email" id="email" name="email" placeholder="Email address" required><br />
+
+					<label class="signLabel" for="pass">Password</label>
+                    <input class="signInput" type="password" id="pass" name="pass" placeholder="Password" required><br />
+
+					<label class="signLabel" for="conpass" id="confirmLabel" style="display:none;">Confirm Password</label>
+                    <input class="signInput" type="password" id="conpass" name="conpass" placeholder="Password"style="display:none;"><br />
+
+                    <button type="submit" value="submit" id="submit" style="margin: 5px 5px 5px 5px; ">Log In</button> 
+                </form>
+			  <button type="button" class="singINswitch" id="singIN" value="singIN" onclick="change(value)" style="display: none;">Sign In</button>
+			  <button type="button" class="singINswitch" id="register" value="register" onclick="change(value)">Create Account</button>
+            </div> 
+</main>
+		  
+</body>
+
+</html>

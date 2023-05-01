@@ -1,0 +1,477 @@
+header {
+	background-color: #68aaff;
+}
+
+.nav {
+	display: inline;
+	text-align: center;
+	height:auto;
+}
+
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	background-color: aliceblue;
+}
+button {
+	font-weight: bold;
+}
+.top {
+	display: inline;
+	margin: 10px 10px 10px 10px;
+	padding: 5px;
+}
+h2 {
+	margin-left: 5px;
+}
+.main {
+	margin: 1em;
+}
+
+h1 {
+	font-size: 2em;
+	text-align: center;
+	margin: 2em auto 1em auto;
+}
+
+.logo a {
+	text-decoration: none;
+	float: left;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin: 10px 10px 10px 10px;
+}
+
+.search {
+	text-align: center;
+	margin: 1em auto;
+	vertical-align: middle;
+}
+
+.search-input {
+	font-size: 1em;
+	padding: .3em 2.2em .3em .5em;
+	border: solid 2px #4a678e;
+	width: 60%;
+	margin: 10px 10px 10px 10px;
+}
+
+search-input:focus {
+	border: solid 2px #18767D;
+	outline: none;
+}
+
+.search-button {
+	padding: 2px;
+	cursor: pointer;
+}
+
+
+.search-button i {
+	font-size: 1.3em;
+	margin-left: -2.7em;
+}
+
+.random-button {
+	text-align: right;
+	padding-right: 5px;
+}
+
+.search-button i {
+	font-size: 1.3em;
+	margin-left: -2.7em;
+}
+
+.nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 .5em 0 0;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+
+.nav li {
+	display: block;
+	cursor: pointer;
+	text-align: center;
+}
+
+.cate a {
+	text-decoration: none;
+	float: left;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin: 10px 10px 10px 10px;
+}
+
+.create a {
+	float: right;
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin: 10px 10px 10px 10px;
+}
+
+.menu {
+	margin: 10px 10px 10px 10px;
+	float: right;
+}
+
+.profile {
+	position: relative;
+	margin: 0 0 0 1em;
+}
+.account-menu:before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	top: -10px;
+	width: 0;
+	height: 0;
+	border: 0 solid;
+	border-color: transparent transparent #fff transparent;
+	z-index: 9999;
+}
+
+.account-menu {
+	display: none;
+	position: absolute;
+	top: 2em;
+	background-color: #fff;
+	padding: 0;
+	box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+	z-index: 9999;
+}
+
+.container {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+	text-align: center;
+}
+.account-menu a {
+	border-bottom: 1px solid #40EAE9;
+	color: black;
+	padding: .3em .3em .3em .3em;
+	text-decoration: none;
+	display: block;
+	font-size: 1em;
+}
+
+.account-menu a:hover {
+	border-bottom: 1px solid #18767D;
+}
+
+.account-menu {
+	top: 2.5em;
+	right: 0;
+}
+
+.account-menu a {
+	padding: .3em .7em .3em .7em;
+}
+
+.profile:hover .account-menu {
+	display: block;
+}
+
+
+.profile:hover .account-menu:before {
+	border-width: 0 10px 10px 10px;
+	margin-left: 2em;
+}
+
+.profile img {
+	margin: 0;
+	border-radius: 100%;
+	border: solid 1.5px #000;
+	width: 1.4em;
+	height: 1.4em;
+}
+
+i {
+	font-size: 1.5em;
+	color: #000;
+}
+
+
+.clear1 {
+	clear: both;
+}
+
+/* category page */
+.categories {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0;
+	align-items: center;
+	justify-content: center;
+}
+
+#catmaths, #cathistory, #catgeography, #catentertainment, #catsports, #catfun {
+	background-position: cover;
+	background-size: 100% 100%;
+	border-radius: .3em;
+	margin: 1em;
+	width: 35%;
+	height: 8em;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	cursor: pointer;
+}
+
+#catmaths:hover, #cathistory:hover, #catgeography:hover, #catentertainment:hover, #catsports:hover, #catfun:hover {
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
+}
+
+
+.categories li {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #fff;
+	z-index: 10;
+	text-shadow: 0px 0px 17px #000;
+}
+
+#catmaths {
+	background-image: url("image/maths.jpg");
+}
+
+#cathistory {
+	background-image: url("image/history.jpg");
+}
+
+#catgeography {
+	background-image: url("image/geography.jpg");
+}
+
+#catentertainment {
+	background-image: url("image/entertainment.jpg");
+}
+
+#catsports {
+	background-image: url("image/sports.jpg");
+}
+
+#catfun {
+	background-image: url("image/forfun.jpg");
+}
+/* create quiz page */
+input, select {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#response {
+	text-align: center;
+}
+.quizForm {
+	text-align: center;
+}
+
+#createQuiz {
+	width: 100%;
+	display: block;
+}
+
+.quizLabel {
+	margin-top: 5px;
+	display: inline-block;
+	width: 20%;
+}
+
+.quizInput {
+	margin-top: 5px;
+	display: inline-block;
+	width: 30%;
+}
+
+select {
+	text-align: center;
+	display: inline-block;
+}
+.small {
+	font-size: 0.8em; 
+	color: darkgray;
+}
+.addQuestion {
+	margin: 5px 5px 5px 5px;
+}
+/* search page */
+
+.sortList {
+	display: flex;
+	float: right;
+}
+.sortBy {
+	margin: 5px;
+}
+/* Sing in page */
+#singIncont {
+	text-align: center;
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: LightBlue;
+	padding: 10px;
+}
+.signLabel {
+	margin-top: 5px;
+	display: inline-block;
+	width: 30%;
+}
+.signInput {
+	margin-top: 5px;
+	display: inline-block;
+	width: 30%;
+}
+.singINswitch {
+	margin: 5px 5px 5px 5px;
+}
+iframe {
+	border: none;
+	width: 30%;
+	height: 20%;
+}
+/* account page */
+.accountCont {
+	text-align: center;
+	width: 40%;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: LightBlue;
+	padding: 10px;
+}
+/* quiz page */
+.quizTop {
+	margin-top: 10px;
+	display: inline-flex;
+	text-align: left;
+}
+
+#thumbnail {
+	margin: 5px;
+}
+.reportQuiz{
+	margin: 5px;
+	text-align: right;
+}
+#reportForm {
+	margin-top: 5px;
+}
+.timer {
+	text-align: right;
+	margin: 5px;
+}
+
+/****************************************** Media queries **********************************/
+@media screen and (min-width: 45em) {
+	.clear1 {
+		clear: none;
+	}
+	.clear2 {
+		clear: both;
+	}
+
+	i {
+		font-size: 2em;
+	}
+
+	.search-input {
+		font-size: 1.3em;
+		width: 13em;
+	}
+
+	.search {
+		margin: 0 auto;
+	}
+
+	.profile {
+		margin: 0 0 0 2em;
+	}
+
+	.profile img {
+		width: 1.9em;
+		height: 1.9em;
+	}
+
+	.nav ul {
+		margin: 0 2em 0 0;
+	}
+
+	.logo a {
+		font-size: 2em;
+}
+	.cate a {
+		font-size: 2em;
+	}
+	.create a {
+		font-size: 2em;
+	}
+
+	.account-menu {
+		right: auto;
+		left: 70%;
+		margin-left: -3em;
+	}
+
+	.profile:hover .account-menu:before {
+		margin-left: 0;
+	}
+
+
+	#catmaths, #cathistory, #catgeography, #catentertainment, #catsports, #catfun {
+		margin: 2em;
+		width: 20%;
+		height: 10em;
+	}
+
+	h1 {
+		margin: 3em auto 2em auto;
+	}
+}
+#review {
+	text-align: center;
+}
+
+@media screen and (max-width: 25em) {
+	.search-input {
+		width: 80%;
+	}
+	#createQuiz {
+		display: flex;
+		flex-direction: column;
+		width: 90%;
+		margin-left: auto;
+		margin-right: auto;
+		align-items: center;
+		justify-content: center;
+	}
+	.quizLabel {
+		margin-top: 5px;
+		display: inline-block;
+		width: 100%;
+	}
+
+	.quizInput {
+		margin-top: 5px;
+		display: inline-block;
+		width:100%;
+	}
+	.container {
+		display: flex;
+		flex-direction: column;
+		width:100%;
+	}
+	#catmaths, #cathistory, #catgeography, #catentertainment, #catsports, #catfun {
+		width: 50%;
+	}
+}

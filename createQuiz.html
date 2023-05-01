@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+<meta charset="utf-8"/>
+
+<meta name="viewport" content="width= device-width, initial-scale=1"/>
+
+<title> Quiz website </title>
+
+<script src="https://kit.fontawesome.com/8a181a8ab1.js" crossorigin="anonymous"></script>
+
+<link href="styles.css" rel="stylesheet">
+<link href="normalize.css" rel="stylesheet">
+<script defer src= "nav.js"> </script>
+<script defer src="createQuiz.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+	<header>
+
+		<div class="nav">
+
+			<div class="logo">
+				<a href="index.html"> Home </a>
+			</div>
+
+			<div class="cate">
+				<a href="category.html">Category</a>
+			</div>
+			<div class="menu">
+				<button id="signIn">Sign in</button>
+				<ul>
+					<li id="accountMenu" class="profile" style="display:none;">
+						<img src="image/profile.png" />
+						<div class="account-menu">
+							<a href="account.html">Account </a>
+							<a href="history.html">History</a>
+							<a href="yourQuiz.html">Your Quiz</a>
+							<a onclick="logOut()"> Log out </a>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+			<div class="create">
+				<a href="createQuiz.html">Create a Quiz</a>
+			</div>
+
+			<div class="clear1"> </div>
+
+			<div class="search">
+
+				<input type="text" class="search-input" placeholder="search an item" id="look">
+				<button type="submit" class="search-button" id="searchbutton">Search</button>
+
+			</div>
+
+			<div class="clear2"> </div>
+
+
+		</div>
+
+	</header>
+
+
+<main>
+
+    <div class="top">
+        <h2>Create a quiz</h2>
+    </div>
+	<hr>
+	<h2 id="response"></h2>
+    <div class="quizForm">   
+		<form id="createQuiz" onsubmit="event.preventDefault(); sendQuiz();">
+
+			<label class="quizLabel" for="quizName">Quiz Name</label>
+			<input class="quizInput" type="text" id="quizName" name="quizName" required><br>
+
+			<label class="quizLabel" for="categ">Category</label>
+			<select class="quizInput" id="categ" name="category" required>
+				<option disabled selected value> -- select an option -- </option>
+				<option value="maths">Maths</option>
+				<option value="sports">Sports</option>
+				<option value="history">History</option>
+				<option value="forFun">For Fun</option>
+				<option value="entertainment">Entertainment</option>
+				<option value="geography">Geography</option>
+			</select><br>
+
+			<label class="quizLabel" for="type">Quiz Type</label>
+			<select class="quizInput" id="type" name="quizType" onchange="radChange(value)" required>
+				<option disabled selected value> -- select an option -- </option>
+				<option value="text">Type the answer that matches the question</option>
+				<option value="clickImage">Click image that matches the text</option>
+				<option value="typeImage">Type what the image is</option>
+			</select><br>
+
+			<label class="quizLabel" for="description">Description</label>
+			<input class="quizInput" type="text" id="description" name="description" required><br>
+
+			<label class="quizLabel" for="duration">Duration(mins)</label>
+			<select class="quizInput" id="duration" name="duration">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="15">15</option>
+				<option value="20">20</option>
+			</select><br>
+
+			<label class="quizLabel" for="thumbnail">Quiz thumbnail</label>
+			<input class="quizInput" type="file" id="thumbnail" name="thumbnail" accept="image/*"><br>
+			<p class="small" id="small" style="display:none;"></p>
+			<hr>
+			<div class="container" id="content">
+			</div>
+
+			<button class="addQuestion" type="button" id="add" onclick="addQuestion()">Add a Question</button> <br>
+			<button type="submit" value="submit" id="submit">Submit</button>
+		</form>
+    </div>
+
+</main>
+
+
+</body>
+
+</html>
