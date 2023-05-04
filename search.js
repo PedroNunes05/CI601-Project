@@ -35,7 +35,7 @@ async function searchResponse(quizzes) {
             <div>
             <img class="quizImg" src="${item.quiz.thumbnail === null ? "image/placeholder.png" : item.quiz.thumbnail}" alt="Quiz thumbnail">
             </div>
-            <div style="display: inline-block; text-align: left; font-weight: bold; hieght: 100%;">
+            <div class="text">
                     <p class="title">
                     ${String(item.quiz.name)}
                     </p>
@@ -65,6 +65,12 @@ async function searchResponse(quizzes) {
             margin-bottom: 15px;
             padding-left: 5%;
             grid-row-gap: 10px;
+            }
+            .text{
+            display: inline-block; 
+            text-align: left; 
+            font-weight: bold; 
+            width: 55%;
             }
             .title{
             font-size: 30px;
@@ -97,6 +103,9 @@ async function searchResponse(quizzes) {
                     max-width: 600px;
                     max-height: 300px;
                     margin: 5px 5px 5px 5px;
+                    }
+                    .text{
+                    width: 100%;
                     }
             }
             @media screen and (max-width: 61.875em){
@@ -136,7 +145,9 @@ async function searchResponse(quizzes) {
 function buttonClick(get) {
     var xmlHttp = new XMLHttpRequest();
     let id = get;
-    xmlHttp.open("GET", "https://pn163.brighton.domains/CI601/php/quiz.php?quizID="+id, false); // false for synchronous request
-    xmlHttp.send();
+    xmlHttp.open("POST", "https://pn163.brighton.domains/CI601/php/quiz.php", false); // false for synchronous request
+    var data = new FormData();
+    data.append('quizID', id);
+    xmlHttp.send(data);
     window.open("quiz.html", "_self");
 }

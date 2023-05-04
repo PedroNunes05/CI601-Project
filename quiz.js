@@ -741,7 +741,6 @@ function clickImage(get) {
 }
 function review() {
     sendData("true");
-    document.getElementById("reviewScore").removeAttribute("onchange");
 }
 function sendData(get) {
     let rating = document.getElementById("reviewScore");
@@ -755,9 +754,6 @@ function sendData(get) {
         if (correct == totalAnswers) {
             quest.splice(0, quest.length);
         }
-    }
-    if (rating.value.length > 0) {
-        reviewScore = rating.value;
     }
     if (quest.length == 0) {
         let reviewZone = `
@@ -796,13 +792,15 @@ function sendData(get) {
                     <button type="button" value="next" onclick="change(value)">Next-></button>
                 `;  
         }
+        if (rating.value.length > 0) {
+            reviewScore = rating.value;
+        }
         let score = (correct / totalAnswers) * 100;
         send = "score=" + score + "&correctAnswers=" + correct;
 
         if (review != null) {
             send += "&review=" + reviewScore;
         }
-        console.log(send);
         const xhr = new XMLHttpRequest();
         xhr.open("POST", 'https://pn163.brighton.domains/CI601/php/quiz.php', false);
         //Send the proper header information along with the request

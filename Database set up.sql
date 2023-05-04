@@ -1,0 +1,153 @@
+﻿/*  Used to drop the tables
+    Drop table tReport;
+    Drop table tQuestion;
+    Drop table tHistory;
+    Drop table tQuiz;
+    Drop table tUser; */
+
+CREATE TABLE tUser(
+	userID varchar(10) PRIMARY KEY NOT NULL,
+    username varchar(50) NOT NULL,
+    email varchar(20) unique NOT NULL,
+    userpass varchar(64) NOT NULL,
+    actions tinyint DEFAULT 0,
+    salt char(5) not null
+)ENGINE=InnoDB;
+CREATE TABLE tQuiz ( 
+	quizID varchar(10) PRIMARY KEY NOT null, 
+	creatorID varchar(10) not null, 
+	quizName varchar(30) not null,
+	duration tinyint DEFAULT 5,
+	avgScore tinyint default 0, 
+	category varchar(15) not null, 
+	attempts SMALLINT DEFAULT 0, 
+	quizType varchar(20) not null, 
+	dateCreated datetime DEFAULT Now(), 
+	description varchar(200) NOT null, 
+	quizReview tinyint default 0,
+	thumbnail varchar(50),
+    restriction tinyint DEFAULT 0,
+	FOREIGN KEY (creatorID) REFERENCES tUser(userID) 
+)ENGINE=InnoDB;
+
+CREATE TABLE tHistory( 
+	quizID varchar(10) not null, 
+	userID varchar(10) Not null, 
+	dateTaken datetime default NOW(), 
+	score tinyint DEFAULT 0, 
+	correctAnswers tinyint DEFAULT 0, 
+	reviewGiven tinyint, 
+	PRIMARY KEY(quizID, userID, dateTaken),
+     FOREIGN KEY (quizID) REFERENCES tQuiz(quizID),
+	 FOREIGN KEY (userID) REFERENCES tUser(userID)
+)ENGINE=InnoDB;
+
+CREATE TABLE tQuestion(
+	questionNumber tinyint NOT null,
+    quizID varchar(10) not null, 
+    question varchar(100) not null,
+    answer1 varchar(30) not null,
+	answer2 varchar(30),
+	answer3 varchar(30),
+    PRIMARY KEY (questionNumber, quizID),
+     FOREIGN KEY (quizID) REFERENCES tQuiz(quizID)
+)ENGINE=InnoDB;
+
+CREATE TABLE tReport (
+	reportID varchar(10) not null PRIMARY key,
+    quizID varchar(10) not null,
+    reporterID varchar(10) not null,
+    reason varchar(200) not null,
+    actionTaken varchar(100),
+     FOREIGN KEY (quizID) REFERENCES tQuiz(quizID),
+     FOREIGN KEY (reporterID) REFERENCES tUser(userID)
+)ENGINE=InnoDB;
+
+DELIMITER //
+create TRIGGER newReview
+AFTER INSERT on tHistory
+FOR EACH ROW
+BEGIN
+	DECLARE quizID varchar(10);
+	DECLARE review tinyint;
+    
+    set	quizID = NEW.quizID;
+    SET review = NEW.reviewGiven;
+
+	IF review IS NOT NULL THEN
+    UPDATE tQuiz
+    set tQuiz.quizReview = (SELECT avg(tHistory.reviewGiven) as newReview FROM tHistory 
+        	WHERE tHistory.reviewGiven IS NOT NULL AND tHistory.quizID = quizID)
+    where tQuiz.quizID = quizID;
+	END IF;
+END //
+DELIMITER ; 
+
+DELIMITER //
+create TRIGGER newScore
+AFTER INSERT on tHistory
+FOR EACH ROW
+BEGIN
+	DECLARE quizID varchar(10);    
+    set	quizID = NEW.quizID;
+    
+    UPDATE tQuiz
+    set tQuiz.avgScore = (SELECT avg(tHistory.score) as newReview FROM tHistory where tHistory.quizID = quizID)
+    where tQuiz.quizID = quizID;
+    
+END //
+DELIMITER ; 
+
+DELIMITER //
+create TRIGGER totalAttempts
+AFTER INSERT on tHistory
+FOR EACH ROW
+BEGIN
+	DECLARE quizID varchar(10);    
+    set	quizID = NEW.quizID;
+    
+    UPDATE tQuiz
+    set tQuiz.attempts = (SELECT COUNT(tHistory.score) as totalAttepmts FROM tHistory where tHistory.quizID = quizID)
+    where tQuiz.quizID = quizID;
+    
+END //
+DELIMITER ; 
+
+DELIMITER //
+create TRIGGER hashPassword
+BEFORE INSERT on tUser
+FOR EACH ROW
+BEGIN
+	DECLARE newSalt char(5);
+    SET newSalt = (SELECT RANDOM_BYTES(5));
+    set NEW.salt = newSalt;
+    set NEW.userpass = (SELECT SHA2(CONCAT(NEW.userpass,newSalt), 256) as newPass);
+    	
+END //
+DELIMITER ;
+
+DELIMITER //
+create TRIGGER createReportID
+BEFORE INSERT on tReport
+FOR EACH ROW
+BEGIN
+	declare total SMALLINT;
+    
+	SET total = (SELECT (COUNT(tReport.reportID)+1) FROM tReport);
+    SET NEW.reportID = (SELECT concat("r", total));
+    
+END //
+DELIMITER ;
+
+DELIMITER //
+create TRIGGER createUserID
+BEFORE INSERT on tUser
+FOR EACH ROW
+BEGIN
+	declare total SMALLINT;
+    
+	SET total = (SELECT (COUNT(tUser.userID)+1) FROM tUser);
+    SET NEW.userID = (SELECT concat("u", total));
+    
+END //
+DELIMITER ;

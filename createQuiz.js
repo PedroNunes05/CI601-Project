@@ -12,6 +12,8 @@ function radChange(get) {
 function addQuestion() {
     small.style.display = "block";
     small.style.fontWeight = "bold";
+
+    i++;
     if (rad ==="") {
         small.innerText = "To add questions you must choose a quiz type";
         small.style.color = "red";
@@ -21,7 +23,7 @@ function addQuestion() {
     if (rad === "text") {
         var question=
             `
-        <div class="questions" id="${i}">
+        <div class="questions" id="questions${i}">
         <label class="questLabel" for="question">Question</label>
         <input class="questInput" type="text" id="question${i}" name="question[${i}][questions]" required><br>
         <label class="questLabel" for="answer1${i}">Answer 1</label>
@@ -30,7 +32,7 @@ function addQuestion() {
         <input class="questInput" type="text" id="answer2${i}" name="question[${i}][answer2]"><br>
         <label class="questLabel" for="answer3${i}">Answer 3</label>
         <input class="questInput" type="text" id="answer3${i}" name="question[${i}][answer3]"><br>
-        <button class="removeButton" type="button" id="remove" value="${i}" onclick="removeQuestion(value)">Remove Question</button>
+        <button class="removeButton" type="button" id="${i}" value="questions${i}" onclick="removeQuestion(value)">Remove Question</button>
         
         <style scoped>
             input, select {
@@ -80,12 +82,12 @@ function addQuestion() {
     } else if (rad === "clickImage") {
         var question =
             `
-            <div class="questions" id="${i}">
+            <div class="questions" id="questions${i}">
             <label  class="questLabel" for="question">Question</label>
             <input class="questInput"  type="text" id="question${i}" name="question[${i}][questions]" required><br>
             <label  class="questLabel" for="answer1${i}">Image for question</label>
 			<input class="questInput"  type ="file" id="answer1${i}" name="question[${i}][answer1]" accept="image/*" required><br>
-            <button class="removeButton" type="button" id="remove" value="${i}" onclick="removeQuestion(value)">Remove Question</button>
+            <button class="removeButton" type="button" id="${i}" value="questions${i}" onclick="removeQuestion(value)">Remove Question</button>
 
             <style scoped>
             input, select {
@@ -135,7 +137,7 @@ function addQuestion() {
     } else if (rad === "typeImage") {
         var question = 
             `
-            <div class="questions" id="${i}">
+            <div class="questions" id="questions${i}">
             <label class="questLabel" for="question">Question</label>
 			<input class="questInput" type ="file" id="question${i}" name="question[${i}][questions]" accept="image/*"><br>
             <label class="questLabel" for="answer1${i}">Answer 1</label>
@@ -144,7 +146,7 @@ function addQuestion() {
             <input class="questInput" type="text" id="answer2${i}" name="question[${i}][answer2]"><br>
             <label class="questLabel" for="answer3${i}">Answer 3</label>
             <input class="questInput" type="text" id="answer3${i}" name="question[${i}][answer3]"><br>
-            <button class="removeButton" type="button" id="remove" value="${i}" onclick="removeQuestion(value)">Remove Question</button>
+            <button class="removeButton" type="button" id="${i}" value="questions${i}" onclick="removeQuestion(value)">Remove Question</button>
 
             <style scoped>
             input, select {
@@ -191,13 +193,73 @@ function addQuestion() {
             </div> <br>
             `;
         content.insertAdjacentHTML("beforeend", question);
-        }
-     i++; 
+        } 
     }
 }
 function removeQuestion(get) {
     let id = get;
     content.removeChild(document.getElementById(id));
+    let totalQuestions = document.querySelectorAll('.questions').length;
+    if (totalQuestions != i) {
+        document.querySelectorAll('.questions').forEach(function () {
+
+            let questBoxNum = 1;
+            for (j = 1; j <= i; j++) {
+                if (typeof document.getElementById("questions" + j) != "undefined") {
+                    let Questbox = document.getElementById("questions" + j),
+                        removeBut = document.getElementById(j);
+                    if (Questbox != null) {
+                        Questbox.setAttribute("id", "questions" + questBoxNum);
+                        removeBut.setAttribute("id", questBoxNum);
+                        removeBut.setAttribute("value", "questions" + questBoxNum);
+                        questBoxNum++;
+                    }
+                }
+            }
+
+            let realQuesNum = 1,
+                realAsnw1 = 1
+            realAsnw2 = 1
+            realAsnw3 = 1;
+
+            for (j = 1; j <= i; j++) {
+                if (typeof document.getElementById("question" + j) != "undefined") {
+                    let inputName = document.getElementById("question" + j);
+                    if (inputName != null) {
+                        inputName.setAttribute("id", "question" + realQuesNum);
+                        inputName.setAttribute("name", "question[" + realQuesNum + "][questions]");
+                        realQuesNum++;
+                    }
+                }
+                if (typeof document.getElementById("answer1" + j) != "undefined") {
+                    let inputName = document.getElementById("answer1" + j);
+                    if (inputName != null) {
+                        inputName.setAttribute("id", "answer1" + realAsnw1);
+                        inputName.setAttribute("name", "question[" + realAsnw1 + "][answer1]");
+                        realAsnw1++;
+                    }
+                }
+                if (typeof document.getElementById("answer2" + j) != "undefined") {
+                    let inputName = document.getElementById("answer2" + j);
+                    if (inputName != null) {
+                        inputName.setAttribute("id", "answer2" + realAsnw2);
+                        inputName.setAttribute("name", "question[" + realAsnw2 + "][answer2]");
+                        realAsnw2++;
+                    }
+                }
+                if (typeof document.getElementById("answer3" + j) != "undefined") {
+                    let inputName = document.getElementById("answer3" + j);
+                    if (inputName != null) {
+                        inputName.setAttribute("id", "answer3" + realAsnw3);
+                        inputName.setAttribute("name", "question[" + realAsnw3 + "][answer3]");
+                        realAsnw3++;
+                    }
+                }
+            }
+        });
+
+        i = document.querySelectorAll('.questions').length;
+    }
 }
 function sendQuiz() {
     let quizName = document.getElementById("quizName").value,
@@ -217,8 +279,8 @@ function sendQuiz() {
             formData.append("thumbnail", thumbnail);
         }
         if (quizType == "text") {
-            for (j = 0; j < i; j++) {
-                let questNum = document.getElementById(j);
+            for (j = 0; j <= i; j++) {
+                let questNum = document.getElementById("questions"+j);
                 if (questNum === null) {
                 } else {
                     let question = document.getElementById("question" + j).value,
@@ -236,7 +298,7 @@ function sendQuiz() {
                 }
             }
         } else if (quizType == "clickImage") {
-            for (j = 0; j < i; j++) {
+            for (j = 0; j <= i; j++) {
                 let questNum = document.getElementById(j)
                 if (questNum === null) {
                 } else {
@@ -247,7 +309,7 @@ function sendQuiz() {
                 }
             }
         } else if (quizType == "typeImage") {
-            for (j = 0; j < i; j++) {
+            for (j = 0; j <= i; j++) {
                 let questNum = document.getElementById(j);
                 if (questNum === null) {
                 } else {
@@ -265,9 +327,6 @@ function sendQuiz() {
                     }
                 }
             }
-        }
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
         }
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.open("POST", "https://pn163.brighton.domains/CI601/php/createQuiz.php", true);

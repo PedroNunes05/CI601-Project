@@ -19,8 +19,7 @@
             $array = "";
             $uploads_dir = "/home/pn163/public_html/CI601/";
 
-            //I removed the username and password for the connection below
-            $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
+          $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
             if($mysqli->connect_errno){
                 //If there is no connections it sends repsonse code 500 and ends
@@ -102,14 +101,13 @@
                                 $questionSQL = "INSERT INTO tQuestion (`questionNumber`,`quizID`,`question`,`answer1`";
 
                                 $question = $mysqli->real_escape_string(rtrim($array['questions']));
-
+                                $questionNumber++;
                                 $name = $_FILES["question"]["name"][$questionNumber];
                                 $realAnswer1 = $mysqli ->real_escape_string($name["answer1"]);
                                 $answer1 = "quizImage/".$quizID . $questionNumber . basename($realAnswer1);
 
                                 $tmp_name = $_FILES["question"]["tmp_name"][$questionNumber];
                                 move_uploaded_file($tmp_name["answer1"], $uploads_dir.$answer1);
-                                $questionNumber++;
 
                                 $questionSQL .= ") VALUES ('" . $questionNumber . "','" . $quizID . "','" . $question . "','" . $answer1 ."');";
                                 $mysqli->query($questionSQL);
@@ -118,6 +116,7 @@
 
                             foreach($questionArray as $array){
                                 $questionSQL = "INSERT INTO tQuestion (`questionNumber`,`quizID`,`question`,`answer1`";
+                                $questionNumber++;
 
                                 $name = $_FILES["question"]["name"][$questionNumber];
                                 $realName = $mysqli ->real_escape_string($name["questions"]);
@@ -125,8 +124,7 @@
 
                                 $tmp_name = $_FILES["question"]["tmp_name"][$questionNumber];
                                 move_uploaded_file($tmp_name["questions"], $uploads_dir.$question);
-                                $questionNumber++;
-
+                                echo $questionNumber;
                                 $answer1 = $mysqli->real_escape_string(rtrim($array['answer1']));
                                 if(isset($array['answer2'])){
                                     $answer2 = $mysqli->real_escape_string(rtrim($array['answer2']));

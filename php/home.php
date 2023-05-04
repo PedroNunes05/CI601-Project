@@ -4,7 +4,6 @@
         public function handleRequest() {
 
             $rating = "";
-            //I removed the username and password for the connection below
             $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
             if($mysqli->connect_errno){
@@ -18,7 +17,7 @@
 
                     $rating = $mysqli -> real_escape_string($_GET['rating']);
                     $sql = "SELECT * from tQuiz "
-                         . "WHERE quizReview = '" . $rating . "'";
+                         . "WHERE restriction = 0 AND quizReview >" . $rating;
 
                     $result = $mysqli->query($sql);
                     $rowcnt = $result->num_rows; //count the number of rows in that is returned from the sql query

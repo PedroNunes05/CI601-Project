@@ -2,7 +2,7 @@
     class MyAPI {
 
         public function handleRequest() {
-            //I removed the username and password for the connection below
+
             $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
             if($mysqli->connect_errno){
@@ -15,15 +15,25 @@
                 if(isset($_POST["quizID"])) {
 
                     if($_POST["quizID"]  == "random"){
-                        $sql = "SELECT quizID FROM tQuiz ORDER BY RAND() LIMIT 1";
+                        $sql = "SELECT quizID FROM tQuiz where restriction = 0 ORDER BY RAND() LIMIT 1";
                         $result = $mysqli->query($sql);
                         foreach($result as $row){
                             $quizID = $row["quizID"];
                             setcookie("quizID", $quizID, time()+60*60, "/");
+
+                            setcookie("searchCookie", "", time()-3600, "/");
+                            setcookie("cateCookie", "", time()-3600, "/");
+                            setcookie("prevCate", "", time()-3600, "/");
+                            setcookie("prevSearch", "", time()-3600, "/");
                         }
                     } else {
                         $quizID = $mysqli -> real_escape_string($_POST["quizID"]);
                         setcookie("quizID", $quizID, time()+60*60, "/");
+
+                        setcookie("searchCookie", "", time()-3600, "/");
+                        setcookie("cateCookie", "", time()-3600, "/");
+                        setcookie("prevCate", "", time()-3600, "/");
+                        setcookie("prevSearch", "", time()-3600, "/");
                     }
                 } else if(isset($_GET["quiz"])){
                     $quizID = $_COOKIE["quizID"];

@@ -17,7 +17,9 @@ function seacrchButtonAPI(get) {
 	var xmlHttp = new XMLHttpRequest();
 	let search = get;
 	xmlHttp.open("POST", "https://pn163.brighton.domains/CI601/php/search.php", false); // false for synchronous request
-	xmlHttp.send("searchCookie =" + search);
+	var data = new FormData();
+	data.append('searchCookie', search);
+	xmlHttp.send(data);
 	window.open("search.html", "_self");
 }
 async function signInAPI() {
@@ -44,6 +46,8 @@ async function singIn(singIN) {
 function logOut() {
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("POST", "https://pn163.brighton.domains/CI601/php/signIn.php", false); // false for synchronous request
-	xmlHttp.send("logOut=true");
+	var data = new FormData();
+	data.append('logOut', 'ture');
+	xmlHttp.send(data);
 	window.open("index.html", "_self");
 }

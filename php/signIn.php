@@ -4,7 +4,6 @@
         public function handleRequest() {
 
 
-            //I removed the username and password for the connection below
             $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
             if($mysqli->connect_errno){
@@ -80,6 +79,8 @@
                     }
                 } else {
                     http_response_code(400);
+                    $test = $_POST["logOut01"];
+                    echo $test;
                 }
 
             }

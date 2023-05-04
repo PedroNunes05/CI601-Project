@@ -44,9 +44,11 @@ function submitIt() {
     if (type == "Register") {
         let pass1 = document.querySelector("#pass").value,
             pass2 = conpass.value;
-        if (pass1 != pass2) {
+        if (pass1 != pass2 ) {
             response.innerText = "Passwords Do Not Match" 
-        } else {
+        } else if(pass1.length <= 6){
+              response.innerText = "Passwords must be longer than 6 characters"   
+        }else {
             sendIn();
         }
     } else { 

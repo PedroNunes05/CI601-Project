@@ -21,7 +21,7 @@ async function searchResponse(history){
             <div>
             <img class="quizImg" src="${item.quiz.thumbnail === null ? "image/placeholder.png" : item.quiz.thumbnail}" alt="Quiz thumbnail">
             </div>
-            <div style="display: inline-block; text-align: left; font-weight: bold; hieght: 100%;">
+            <div class="text">
                     <p class="title">
                     ${String(item.quiz.name)}
                     </p>
@@ -56,6 +56,12 @@ async function searchResponse(history){
             padding-left: 5%;
             grid-row-gap: 10px;
             }
+            .text{
+            display: inline-block; 
+            text-align: left; 
+            font-weight: bold; 
+            width: 55%;
+            }
             .title{
             font-size: 30px;
             font-weight: bold;
@@ -87,6 +93,9 @@ async function searchResponse(history){
                     max-width: 600px;
                     max-height: 300px;
                     margin: 5px 5px 5px 5px;
+                    }
+                    .text{
+                    width: 100%;
                     }
             }
             @media screen and (max-width: 61.875em){

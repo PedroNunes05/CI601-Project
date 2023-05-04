@@ -3,7 +3,7 @@ class MyAPI {
 
     public function handleRequest() {
 
-        //I removed the username and password for the connection below
+
         $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
         if($mysqli->connect_errno){
@@ -21,18 +21,32 @@ class MyAPI {
                 setcookie("cateCookie", $cate, time()+600, "/");
 
             }else if(isset($_GET["searchPage"])){
-                $sql = "SELECT * from tQuiz WHERE ";
+                $sql = "SELECT * from tQuiz WHERE restriction = 0 AND ";
                 $search = null;
                 $category = null;
+                $sortby = " ORDER BY quizReview DESC";
 
             if(isset($_COOKIE["searchCookie"])){
                 $search = $_COOKIE["searchCookie"];
                 setcookie("searchCookie", "", time()-3600, "/");
+                setcookie("prevSearch", $search, time()+600, "/");
             }
              if(isset($_COOKIE["cateCookie"])){
                 $category = $_COOKIE["cateCookie"];
                 setcookie("cateCookie", "", time()-3600, "/");
+                setcookie("prevCate", $category, time()+600, "/");
              }
+             if(isset($_GET["sort"])){
+                 $sort = $_GET["sort"];
+                 if(isset( $_COOKIE["prevCate"])){
+                     $category = $_COOKIE["prevCate"];
+                 }
+                 if(isset($_COOKIE["prevSearch"])){
+                    $search = $_COOKIE["prevSearch"];
+                 }
+                 $sortby = " ORDER BY " . $sort . " DESC";
+             }
+
              if(isset($search) && isset($category)){
                  $sql .= "quizName like '%" . $search . "%' AND category = '" . $category . "'";
              } else if(isset($category)){
@@ -40,14 +54,7 @@ class MyAPI {
              } else if(isset($search)){
                 $sql .= "quizName like '%" . $search . "%'";
              }
-             if(isset($_GET["sort"])){
-                 $sort = $_GET["sort"];
-                 if($sort === "none"){
-                     $sql .= "ORDER BY quizReview DESC";
-                 } else {
-                     $sql.= " ORDER BY " . $sort . " DESC";
-                 }
-             }
+             $sql .= $sortby;
 
             $result = $mysqli->query($sql);
             $rowcnt = $result->num_rows; //count the number of rows in that is returned from the sql query

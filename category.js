@@ -37,6 +37,8 @@ function cateAPI(get) {
 	var xmlHttp = new XMLHttpRequest();
 	let category = get;
 	xmlHttp.open("POST", "https://pn163.brighton.domains/CI601/php/search.php", false); // false for synchronous request
-	xmlHttp.send("cateCookie=" + category);
+	var data = new FormData();
+	data.append('cateCookie', category);
+	xmlHttp.send(data);
 	window.open("search.html", "_self");
 }
