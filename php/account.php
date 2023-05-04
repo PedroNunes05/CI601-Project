@@ -4,7 +4,7 @@
         public function handleRequest() {
 
 
-            //I removed the username and password for the connection below
+
             $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
             if($mysqli->connect_errno){

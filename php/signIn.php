@@ -3,7 +3,7 @@
 
         public function handleRequest() {
 
-
+            //Removed username and password 
             $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
             if($mysqli->connect_errno){
