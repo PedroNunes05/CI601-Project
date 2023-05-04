@@ -5,7 +5,7 @@
 
 
 
-            $mysqli = new mysqli("brighton", "pn163_CI601project","CI601project","pn163_project"); //Connect to database
+            $mysqli = new mysqli("brighton", "","","pn163_project"); //Connect to database
 
             if($mysqli->connect_errno){
                 //If there is no connections it sends repsonse code 500 and ends
