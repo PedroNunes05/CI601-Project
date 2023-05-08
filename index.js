@@ -130,13 +130,17 @@ async function searchResponse(quizzes){
 function randomButton() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("POST", "https://pn163.brighton.domains/CI601/php/quiz.php", false); // false for synchronous request
-    xmlHttp.send("quizID=random");
+    var data = new FormData();
+    data.append('quizID', "random");
+    xmlHttp.send(data);
     window.open("quiz.html", "_self");
 }
 function buttonClick(get) {
     var xmlHttp = new XMLHttpRequest();
     let id = get;
     xmlHttp.open("POST", "https://pn163.brighton.domains/CI601/php/quiz.php", false); // false for synchronous request
-    xmlHttp.send("quizID =" + id);
+    var data = new FormData();
+    data.append('quizID', id);
+    xmlHttp.send(data);
     window.open("quiz.html", "_self");
 }
